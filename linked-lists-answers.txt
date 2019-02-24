@@ -1,0 +1,175 @@
+1.  What are some pros and cons of using linked lists instead of arrays?
+    PROS
+    a. There is no memory waste 
+    b. Linked list are dynamic in size whereas arrays are fixed
+    
+    CONS
+    a. One cannot have random  access to the nodes. have to start from the 
+       head always  
+     
+2.  Come up with a real world example of a linked list.
+ANS.
+    The History section of a web browser can be an example of linked list where
+    it creates a linked list of web-pages visited, so that when you check history 
+    or press back button, the previous node's data is fetched.
+
+
+       Programming Questions
+
+
+1.  The linked list push function should take a value, create a node, 
+    and add it to the end of a list. Below is pseudocode for a push function for a 
+    singly linked list. However, there is something wrong with it. Submit both an 
+    explanation of the bug and a functional implementation of the method.
+
+   FUNCTION push(element)
+    CREATE node
+    SET node.value TO element
+    SET node.next TO null
+
+    IF the head node does not exist
+      THEN SET head to node
+    ELSE
+      SET current to head
+      SET current.next to node
+    END IF
+   END FUNCTION
+ 
+      ANSWER
+   The given pseudocode does not give us a way to move from node to the next
+   node on the list.Therefore we dont have a definate way to determine the end
+   of the list. To solve this, we need to create a while loop to go through each
+   node to help us find the last node.
+
+
+   pushElement.prototype.push = function(element){
+     var node = {
+       value = element,
+       next = null
+     }
+
+   
+   if(this.head === null){
+     this.head = node;
+   } else{
+       var currentNode = this.head;
+       while(currentNode.next){
+          currentNode = currentNode.next;
+       }
+    
+    currentNode.next = node;
+     }
+    this.length += 1;
+    return node;
+   } 
+
+
+2.   Given an unsorted singly linked list, remove all duplicates from the linked list.
+     Example
+
+     function removeDuplicate(){
+         this.head = null;
+         this.length = 0;
+      }
+
+      removeDuplicate.prototype.push = function(val){  
+         var node = {
+            value: val,
+            next: null
+          }
+ 
+         if(this.head == null){
+            this.head = node;  
+            this.length += 1;    
+            return node;
+          }
+          else{
+               current = this.head;
+               while(current.next){
+               current = current.next;
+               }
+              current.next = node;
+              this.length += 1;
+              return node;
+    }
+  }
+
+  removeDuplicate.prototype.duplicate = function(){
+ if (!this.head || !this.head.next) {
+      console.log("there's no duplicate");
+      return;
+  }
+
+    var thisNode = this.head;
+    while (thisNode != null) {
+      var previousNode = thisNode;
+      var nextNode = thisNode.next;
+      while (nextNode != null) {
+        if (thisNode.value == nextNode.value) {
+          previousNode.next = nextNode.next;
+          this.length --;
+        } else {
+          previousNode = nextNode;
+        }
+        nextNode = nextNode.next;
+      }
+      thisNode = thisNode.next;
+    }
+    return this;
+  }
+       
+     Input: a -> c -> d -> d -> a
+     Output: a -> c -> d
+
+3.   Given an unsorted singly linked list, reverse it.
+     Example
+     
+     reverseData.prototype.push = function(val){  
+         var node = {
+            value: val,
+            next: null
+          }
+ 
+         if(this.head == null){
+            this.head = node;  
+            this.length += 1;    
+            return node;
+          }
+          else{
+               current = this.head;
+               while(current.next){
+               current = current.next;
+               }
+              current.next = node;
+              this.length += 1;
+              return node;
+        }
+      } 
+
+     reverseData.prototype.reverse= function() {
+       var previousNode = null;
+       var thisNode = this.head;
+       var nextNode;
+
+    while (thisNode) {
+      nextNode = thisNode.next;
+      thisNode.next = previousNode;
+      previousNode = thisNode;
+      thisNode = nextNode;
+    }
+
+    this.head = previousNode;
+  }
+
+
+     Input: a -> b -> c -> d
+     Output: d -> c -> b -> a
+
+
+//////////////////////////////////////////////////////
+
+   
+
+
+
+
